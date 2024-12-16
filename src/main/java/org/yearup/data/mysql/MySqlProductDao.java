@@ -23,6 +23,8 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     {
         List<Product> products = new ArrayList<>();
 
+        // Fig bug here re product search functionality returning wrong result
+
         String sql = "SELECT * FROM products " +
                 "WHERE (category_id = ? OR ? = -1) " +
                 "   AND (price <= ? OR ? = -1) " +

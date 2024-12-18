@@ -97,14 +97,14 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
             throw new RuntimeException(e);
         }
         return null;
-    }        return null;
     }
+
 
     @Override
     public void update(int categoryId, Category category)
     {
         String sql = "UPDATE CATEGORIES" + "SET NAME = ?" + ", DESCRIPTION = ?"+"WHERE CATEGORY_ID= ?;";
-        try (Connection connection = getConnection()){
+        try (Connection connection = this.getConnection()){
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category.getName());
             statement.setString(2, category.getDescription() );

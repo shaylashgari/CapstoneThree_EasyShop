@@ -20,11 +20,17 @@ import java.util.List;
 public class CategoriesController
 {
     private CategoryDao categoryDao;
+    private ProductDao productDao;
 
 
     // create an Autowired controller to inject the categoryDao and ProductDao
     @Autowired
-    public void CategoryController (CategoryDao categoryDao){this.categoryDao= categoryDao;}
+    public CategoriesController (CategoryDao categoryDao, ProductDao productDao)
+    {this.categoryDao= categoryDao;
+        this.productDao= productDao;
+    }
+
+
 
     @GetMapping("")
     @PreAuthorize("permitAll()")
@@ -63,7 +69,7 @@ public class CategoriesController
     public List<Product> getProductsById(@PathVariable int categoryId)
     {
 
-        var categories = categoryDao.getById(categoryId);
+        return productDao.listByCategoryId(categoryId);
         // get a list of product by categoryId
 
     }

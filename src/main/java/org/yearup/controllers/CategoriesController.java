@@ -78,10 +78,11 @@ public class CategoriesController
     // add annotation to ensure that only an ADMIN can call this function
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public Category addCategory(@RequestBody Category category)
     {
         return categoryDao.create(category);
-        // insert the category
+
 
     }
 

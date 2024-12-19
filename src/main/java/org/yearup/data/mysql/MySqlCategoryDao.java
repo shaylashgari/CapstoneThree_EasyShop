@@ -42,10 +42,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     @Override
     public Category getById(int categoryId)
     {
-        String sql = "SELECT * FROM products WHERE product_id = ?";
-        try (Connection connection = getConnection())
+        String sql = "SELECT * FROM products WHERE product_id= ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);)
         {
-            PreparedStatement statement = connection.prepareStatement(sql);
+
             statement.setInt(1, categoryId);
 
             ResultSet row = statement.executeQuery();
@@ -66,8 +67,8 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     public Category create(Category category)
     {
 
-        String sql = "INSERT INTO categories (name, description, category_id) " +
-                " VALUES (?, ?, ?);";
+        String sql = "INSERT INTO categories (name, description, category_id)" +
+                "VALUES (?, ?, ?);";
 
         try (Connection connection = getConnection())
         {
@@ -103,7 +104,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     @Override
     public void update(int categoryId, Category category)
     {
-        String sql = "UPDATE CATEGORIES" + "SET NAME = ?" + ", DESCRIPTION = ?"+"WHERE CATEGORY_ID= ?;";
+        String sql = "UPDATE CATEGORIES" + "SET NAME = ?" + ", DESCRIPTION = ? "+"WHERE CATEGORY_ID= ?;";
         try (Connection connection = this.getConnection()){
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category.getName());
@@ -118,7 +119,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     @Override
     public void delete(int categoryId)
     {
-        String sql = "DELETE FROM products " +
+        String sql = "DELETE FROM products" +
                 " WHERE category_id = ?;";
 
         try (Connection connection = getConnection())
@@ -140,12 +141,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         String name = row.getString("name");
         String description = row.getString("description");
 
-        Category category = new Category()
-        {{
-            setCategoryId(categoryId);
-            setName(name);
-            setDescription(description);
-        }};
+        Category category = new Category();
+            category.setCategoryId(categoryId);
+            category.setName(name);
+            category.setDescription(description);
+       ;
 
         return category;
     }

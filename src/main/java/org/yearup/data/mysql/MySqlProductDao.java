@@ -23,7 +23,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     {
         List<Product> products = new ArrayList<>();
 
-        // Fix bug here re product search functionality returning wrong result
+        // Fix bug here re product search functionality returning wrong result #2
 
         String sql = "SELECT * FROM products " +
                 "WHERE 1 = 1 ";
@@ -32,13 +32,13 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
             sql += "AND category_id = ?";
 
         if(minPrice != null)
-            sql += "AND price >= ?";
+            sql += " AND price >= ?";
 
         if(maxPrice != null)
-            sql += "AND price <= ?";
+            sql += " AND price <= ?";
 
         if (color != null)
-            sql += "AND color LIKE ?";
+            sql += " AND color LIKE ?";
 
         try(Connection connection = getConnection();
            PreparedStatement statement = connection.prepareStatement(sql) ){
@@ -75,11 +75,8 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, categoryId);
-            statement.setInt(2, categoryId);
-            statement.setBigDecimal(3, minPrice);
-            statement.setBigDecimal(4, minPrice);
-            statement.setString(5, color);
-            statement.setString(6, color);
+            statement.setBigDecimal(2, minPrice);
+            statement.setString(3, color);
 
             ResultSet row = statement.executeQuery();
 

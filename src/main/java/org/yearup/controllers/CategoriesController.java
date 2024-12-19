@@ -33,7 +33,7 @@ public class CategoriesController
 
 
     @GetMapping("")
-    @PreAuthorize("permitAll()")
+   // @PreAuthorize("permitAll()")
     // add the appropriate annotation for a get action
     public List<Category> getAll()
     {
@@ -42,7 +42,7 @@ public class CategoriesController
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("permitAll")
+   // @PreAuthorize("permitAll")
     // add the appropriate annotation for a get action
     public Category getById(@PathVariable int id)
     {
@@ -76,7 +76,7 @@ public class CategoriesController
 
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Category addCategory(@RequestBody Category category)

@@ -15,4 +15,4 @@
 
 ## How far I got:
 
-I was able to complete basic requirements. My front end was working, but it is not working now. 
+I was able to complete basic requirements.

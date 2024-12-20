@@ -76,7 +76,7 @@ public class ProductsController
         }
     }
 
-    // BUG 2 here
+    // BUG 1 here
 
     @PutMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

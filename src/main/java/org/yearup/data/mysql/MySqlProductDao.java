@@ -23,7 +23,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     {
         List<Product> products = new ArrayList<>();
 
-        // Fix bug here re product search functionality returning wrong result #2
+        // Fix bug #2 here re product search functionality returning wrong result #2
 
         String sql = "SELECT * FROM products " +
                 "WHERE 1 = 1 ";
@@ -65,31 +65,31 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
             throw new RuntimeException(e);
         }
 
+//
+//        categoryId = categoryId == null ? -1 : categoryId;
+//        minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
+//        maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
+//        color = color == null ? "" : color;
 
-        categoryId = categoryId == null ? -1 : categoryId;
-        minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
-        maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
-        color = color == null ? "" : color;
-
-        try (Connection connection = getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, categoryId);
-            statement.setBigDecimal(2, minPrice);
-            statement.setString(3, color);
-
-            ResultSet row = statement.executeQuery();
-
-            while (row.next())
-            {
-                Product product = mapRow(row);
-                products.add(product);
-            }
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+//        try (Connection connection = getConnection())
+//        {
+//            PreparedStatement statement = connection.prepareStatement(sql);
+//            statement.setInt(1, categoryId);
+//            statement.setBigDecimal(2, minPrice);
+//            statement.setString(3, color);
+//
+//            ResultSet row = statement.executeQuery();
+//
+//            while (row.next())
+//            {
+//                Product product = mapRow(row);
+//                products.add(product);
+//            }
+//        }
+//        catch (SQLException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
 
         return products;
     }
